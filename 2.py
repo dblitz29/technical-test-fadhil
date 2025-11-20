@@ -23,3 +23,8 @@ for chunk in pd.read_csv(file_path, chunksize=chunk_size):
         else:
             city_count[city] = 1
 
+top_countries = sorted(country_count.items(), key=lambda x: x[1], reverse=True)[:10]
+top_cities = sorted(city_count.items(), key=lambda x: x[1], reverse=True)[:10]
+print("Total rows:", total_rows, end="\n")
+print("Top 10 Countries:", top_countries, end="\n")
+print("Top 10 Cities:", top_cities, end="\n")
