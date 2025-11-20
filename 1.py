@@ -17,8 +17,6 @@ print("== Dataset Info ==")
 df.info()
 print("\n")
 
-print("== Missing Values ==")
-print(df.isna().sum().sort_values(ascending=False).head(10), end="\n\n")
-
-print("== Description ==")
-print(df.describe(), end="\n")
+print("Total rows: ", len(df))
+print("Top countries: ", df['Country'].value_counts().head(10).to_dict(), end="\n\n")
+print("Top cities: ", df['City'].value_counts().head(10).to_dict(), end="\n\n")
