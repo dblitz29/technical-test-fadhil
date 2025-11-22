@@ -3,8 +3,8 @@
 
 import pandas as pd
 
-file_path = 'assets\\customers-200000.csv'
-chunk_size = 50000
+file_path = 'assets\\customers-2000000.csv'
+chunk_size = 100000
 total_rows = 0
 country_count = {}
 city_count = {}
