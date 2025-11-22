@@ -1,53 +1,112 @@
-Coding Test – Solution Summary
+# Coding Test – Solution Summary
 
-This repo contains my answers for all parts of the Shopee coding test.
-Each question is placed in its own file/folder so it’s easier to check.
+This repository contains all my answers for the coding test.  
+Each question is placed in its own file or folder so its easier to review.
 
-1. Parsing small CSV (100k rows)
+---
 
-File: 1.py
+## 1. Parsing Small CSV (100k rows)
 
-I used pandas because the file is not too big, so loading it into memory is fine.
-The script prints the dataset shape, simple stats, missing values, and also the top 10 countries and cities.
+**File:** `1.py`
 
-Make sure the file customers-100000.csv is inside the assets/ folder.
+For the smaller dataset, I use pandas normally.  
+The file is not too large, so loading it fully into memory is fine.
 
-2. Parsing large CSV (2M rows) with low memory
+The script prints:
+- dataset shape  
+- preview rows  
+- dataset info  
+- missing values  
+- top 10 countries & cities  
 
-File: 2.py
+**Run:**
+```bash
+python 1.py
+```
 
-For the big CSV, I don’t load everything at once.
-I process it using chunked reading, and count values manually so the memory stays small.
-The script shows the aggregated stats after finishing all chunks.
+Make sure `customers-100000.csv` is inside the `assets/` directory.
 
-Put customers-2000000.csv in the assets/ directory.
+---
 
-3. Difference between small vs large file processing
+## 2. Parsing Large CSV (2M rows) with Low Memory
 
-File: 3.md
+**File:** `2.py`
 
-Short explanation of the approach difference:
-small file → load everything, use regular pandas features
-large file → read in chunks, update counters manually, keep memory low
+For the large CSV, I cannot load everything at once.  
+I process the file using **chunked reading**, count values manually, and keep the memory usage low.  
+After all chunks are processed, the script prints the aggregated results.
 
-4. Vector DB + Cosine Similarity (No high-level library)
+**Run:**
+```bash
+python 2.py
+```
 
-Folder: 4/
-Files: db_init.py, search.py
+Place `customers-2000000.csv` in the `assets/` folder.
 
-I built a tiny vector store using SQLite.
-Embeddings are stored as comma-separated strings, then loaded back as float vectors.
-Cosine similarity is implemented manually without numpy/FAISS/other libs.
+---
 
-5. Receipt Analysis Platform (UI + CV + DB + LLM)
+## 3. Difference Between Small vs Large File Processing
 
-Repo:
+**File:** `3.md`
+
+For the small file, everything can be loaded into memory at once, so its straightforward. I can use pandas normally, explore the whole dataset, and run things like value_counts() or describe() without worrying about memory.
+
+For the large file, the approach changes because its too big to load in one go. Instead of reading the entire CSV, I read it in chunks. Each chunk is processed and then discarded, which keeps memory usage low. I can still count things like countries and cities, but I have to do it manually by updating a dictionary, since I dont have the full dataset in memory.
+- **Small file** : load everything, use pandas features directly.  
+- **Large file** : read chunk-by-chunk and only store what’s needed.  
+
+The complete explanation is inside the markdown file.
+
+---
+
+## 4. Vector DB + Manual Cosine Similarity
+
+**Folder:** `4/`  
+**Files:** `db_init.py`, `search.py`
+
+I created a simple vector store using SQLite.  
+Each embedding is stored as a comma-separated string, then converted back into floats when searching.  
+Cosine similarity is implemented manually without using numpy, FAISS, or other high-level libraries.
+
+**Initialize the database:**
+```bash
+python 4/db_init.py
+```
+
+**Search using cosine similarity:**
+```bash
+python 4/search.py
+```
+
+---
+
+## 5. Receipt Analysis Platform (UI + CV + DB + LLM)
+
+**Repo:**  
 https://github.com/dblitz29/receipt-analysis-system
 
-Inside that repo there are several parts:
-upload page (simple web UI)
-extraction using computer vision
-store receipt info into database
-basic AI tools so user can ask things like:
-docker container
-CI/CD using GitHub Actions
+The project contains:
+- upload page for food receipts  
+- computer vision extractor  
+- store extracted data into a database  
+- basic AI tools so users can ask things 
+- packaged into a Docker image  
+- CI/CD via GitHub Actions  
+
+**Run locally:**
+```bash
+pip install -r requirements.txt
+python app.py
+```
+
+**Run with Docker:**
+```bash
+docker build -t receipt-app .
+docker run -p 5000:5000 receipt-app
+```
+
+---
+
+## Notes
+
+- For question #4, no external vector libraries were used.
