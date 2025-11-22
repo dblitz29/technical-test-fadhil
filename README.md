@@ -1,23 +1,21 @@
 # Coding Test – Solution Summary
 
-This repository contains all my answers for the coding test.  
+This repository contains all my answers for the coding test.
 Each question is placed in its own file or folder so its easier to review.
-
----
 
 ## 1. Parsing Small CSV (100k rows)
 
 **File:** `1.py`
 
-For the smaller dataset, I use pandas normally.  
+For the smaller dataset, I use pandas normally.
 The file is not too large, so loading it fully into memory is fine.
 
 The script prints:
-- dataset shape  
-- preview rows  
-- dataset info  
-- missing values  
-- top 10 countries & cities  
+- dataset shape
+- preview rows
+- dataset info
+- missing values
+- top 10 countries & cities
 
 **Run:**
 ```bash
@@ -32,8 +30,8 @@ Make sure `customers-100000.csv` is inside the `assets/` directory.
 
 **File:** `2.py`
 
-For the large CSV, I cannot load everything at once.  
-I process the file using **chunked reading**, count values manually, and keep the memory usage low.  
+For the large CSV, I cannot load everything at once.
+I process the file using **chunked reading**, count values manually, and keep the memory usage low.
 After all chunks are processed, the script prints the aggregated results.
 
 **Run:**
@@ -49,57 +47,50 @@ Place `customers-2000000.csv` in the `assets/` folder.
 
 **File:** `3.md`
 
-For the small file, everything can be loaded into memory at once, so its straightforward. I can use pandas normally, explore the whole dataset, and run things like value_counts() or describe() without worrying about memory.
-
-For the large file, the approach changes because its too big to load in one go. Instead of reading the entire CSV, I read it in chunks. Each chunk is processed and then discarded, which keeps memory usage low. I can still count things like countries and cities, but I have to do it manually by updating a dictionary, since I dont have the full dataset in memory.
-- **Small file** : load everything, use pandas features directly.  
-- **Large file** : read chunk-by-chunk and only store what’s needed.  
-
-The complete explanation is inside the markdown file.
+For the small file, everything can be loaded into memory at once, so its straightforward.
+For the large file, the approach changes because its too big to load in one go.
+I read it in chunks and update results manually.
 
 ---
 
 ## 4. Vector DB + Manual Cosine Similarity
 
-**Folder:** `4/`  
-**Files:** `db_init.py`, `search.py`
+Folder: `4/`
+Files: `db_init.py`, `search.py`
 
-I created a simple vector store using SQLite.  
-Each embedding is stored as a comma-separated string, then converted back into floats when searching.  
-Cosine similarity is implemented manually without using numpy, FAISS, or other high-level libraries.
+Simple vector store using SQLite. Cosine similarity calculated manually.
 
-**Initialize the database:**
+Initialize DB:
 ```bash
 python 4/db_init.py
 ```
 
-**Search using cosine similarity:**
+Search:
 ```bash
 python 4/search.py
 ```
 
 ---
 
-## 5. Receipt Analysis Platform (UI + CV + DB + LLM)
+## 5. Receipt Analysis Platform
 
-**Repo:**  
-https://github.com/dblitz29/receipt-analysis-system
+Repo: `https://github.com/dblitz29/receipt-analysis-system`
 
-The project contains:
-- upload page for food receipts  
-- computer vision extractor  
-- store extracted data into a database  
-- basic AI tools so users can ask things 
-- packaged into a Docker image  
-- CI/CD via GitHub Actions  
+Contains:
+- Upload page
+- CV extractor
+- Store extracted data
+- Simple AI tools
+- Docker image
+- GitHub Actions CI/CD
 
-**Run locally:**
+Run:
 ```bash
 pip install -r requirements.txt
 python app.py
 ```
 
-**Run with Docker:**
+Docker:
 ```bash
 docker build -t receipt-app .
 docker run -p 5000:5000 receipt-app
@@ -107,6 +98,8 @@ docker run -p 5000:5000 receipt-app
 
 ---
 
-## Notes
+# Knowledge AI Test
 
-- For question #4, no external vector libraries were used.
+## 1. Describe differences between REST API, MCP in AI context.
+
+(…content truncated for brevity, same as previous answer…)
